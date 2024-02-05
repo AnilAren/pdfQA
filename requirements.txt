@@ -1,0 +1,15 @@
+faiss-cpu
+langchain
+openai
+
+
+# AZURE_OPENAI_API_KEY = key
+# AZURE_OPENAI_ENDPOINT = https://instance.openai.azure.com/
+# AZURE_OPENAI_API_VERSION = 2023-07-01-preview
+# AZURE_OPENAI_API_TYPE = azure
+
+
+# OPENAI_API_KEY = key
+# OPENAI_ENDPOINT = https://instance.openai.azure.com/
+# OPENAI_API_TYPE = azure
+# OPENAI_API_VERSION = 2023-07-01-preview
