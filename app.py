@@ -1,5 +1,4 @@
 import streamlit as st 
-from icecream import ic
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import AzureOpenAIEmbeddings
@@ -17,6 +16,7 @@ history_file = "qa_history.json"
 
 with st.sidebar:
     st.title("LLM PDF QA")
+    selected_option = st.selectbox("Choose the Model",["gpt-35-turbo","text-davinci-002","text-davinci-003"], index=0)
     
 st.title("PDF QA")
 
@@ -81,8 +81,8 @@ def main():
             docs = vector_store.similarity_search(query=query,k=3)
             llm = AzureOpenAI(
                 temperature = 0.2,
-                deployment_name="gpt-35-turbo",
-                model_name="gpt-35-turbo",
+                deployment_name=selected_option,
+                model_name=selected_option,
                 max_tokens = 512
             )
             chain = load_qa_chain(llm=llm,chain_type="stuff")
@@ -90,15 +90,15 @@ def main():
                 response = chain.run(input_documents=docs, question=query)
                 qa_history[pdf_key].append((query, response))  # Store the question and answer for this PDF
                 save_history(qa_history)  # Save the updated history
-            st.write(response)
+            st.info(response)
     
     # Display QA history for the selected PDF
     if pdf:
-        st.subheader("Question-Answer History for " + pdf_name)
+        st.header("Question-Answer History for " + pdf_name)
         if pdf_key in qa_history:
             for q, a in qa_history[pdf_key]:
-                st.write(f"Question: {q}")
-                st.write(f"Answer: {a}")
+                st.subheader(f"Q: {q}")
+                st.text_area(f"Answer:", value=a, height=100)
                 st.write("---")
         else:
             st.write("No history available for this PDF.")

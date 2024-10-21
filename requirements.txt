@@ -1,7 +1,16 @@
+streamlit
 faiss-cpu
 langchain
 openai
-
+PyPDF2
+langchain_openai
+langchain_community
+python-dotenv
+# pytesseract
+# fitz
+# frontend
+# tools
+# PyMuPDF
 
 # AZURE_OPENAI_API_KEY = key
 # AZURE_OPENAI_ENDPOINT = https://instance.openai.azure.com/
