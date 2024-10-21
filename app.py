@@ -68,7 +68,7 @@ def main():
                     )
         
         if os.path.exists(vector_store_file):
-            vector_store = FAISS.load_local(vector_store_file,embeddings=embeddings)
+            vector_store = FAISS.load_local(vector_store_file,embeddings=embeddings,allow_dangerous_deserialization=True) # Added allow_dangerous_deserialization- cause i was getting error in Azure deployment
             st.write("Embeddings Loaded from Memory")
         else:
             vector_store = FAISS.from_texts(chunks, embedding=embeddings)
